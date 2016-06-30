@@ -1,0 +1,27 @@
+﻿Chicago, IL
+New York, NY
+Philadelphia, PA
+Washington, DC
+Dallas, TX
+Miami, FL
+Atlanta, GA
+New Orleans, LA
+Santa Fe, NM
+
+
+Phoenix, AZ
+Las Vegas, NV
+San Diego, CA
+Los Angeles, CA
+
+San Francisco, CA
+Sacramento, CA
+Portland, OR
+Seattle, WA
+Denver, CO
+Detroit, MI
+Minneapolis, MN
+
+
+
+
