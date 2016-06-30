@@ -10,7 +10,7 @@ The next step is to develop a set of queries and present the results to the end 
 
  [X] Execute a Linq query to sort the entries in the list in ascending order and present the list of cities to the end user, in order.
 
- [ ] Execute a Linq query to find all states starting with a specific letter. Prompt the user for the letter they want to look for, then present those that start with that
+ [X] Execute a Linq query to find all states starting with a specific letter. Prompt the user for the letter they want to look for, then present those that start with that
  letter to them. There is no need at this time to validate that they entered a letter.
 
  [ ] Execute a Linq query to find all cities that are from a given state. Prompt the user for the state they want to look for, then present those that are from that state to
@@ -82,6 +82,29 @@ namespace pos409_linq
             ascCities.AddRange(cities.OrderBy(i => i));
             ascCities.ForEach(city => Console.WriteLine(city));
 
+
+
+            // Display all states starting with a user specified letter
+            //
+            Console.Write("Please enter first letter of desired state" + Environment.NewLine + "> ");
+            string letter = Console.ReadLine();
+            List<string> states = new List<string>();
+            states.AddRange(cities.Select(city => city.Split(',').ToList().Last().Trim()).Distinct());
+
+            List<string> letterStates = new List<string>();
+            letterStates.AddRange(states.Where(state => state.StartsWith(letter, StringComparison.OrdinalIgnoreCase)));
+            letterStates.ForEach(c => Console.WriteLine(c));
+
+
+
+
+            //Console.Write("Please enter first letter of desired state" + Environment.NewLine + "> ");
+            //string letter = Console.ReadLine();
+            //List<string> letterCities = new List<string>();
+            //letterCities.AddRange(cities.Where(i => i.Split(',').ToList().Last().Trim().StartsWith(letter, StringComparison.OrdinalIgnoreCase)));
+            //letterCities.ForEach(city => Console.WriteLine(city));
+
+            
 
 
             Console.ReadLine();
