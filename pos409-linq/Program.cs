@@ -6,9 +6,9 @@
  
 The next step is to develop a set of queries and present the results to the end user. In total you will do five Linq queries:
 
- [ ] Execute a Linq query to count how many records are in the list and present the total to the end user.
+ [X] Execute a Linq query to count how many records are in the list and present the total to the end user.
 
- [ ] Execute a Linq query to sort the entries in the list in ascending order and present the list of cities to the end user, in order.
+ [X] Execute a Linq query to sort the entries in the list in ascending order and present the list of cities to the end user, in order.
 
  [ ] Execute a Linq query to find all states starting with a specific letter. Prompt the user for the letter they want to look for, then present those that start with that
  letter to them. There is no need at this time to validate that they entered a letter.
@@ -38,9 +38,10 @@ namespace pos409_linq
         static void Main(string[] args)
         {
             List<string> cities = new List<string>();
-            
             int count = 0;
 
+            // Read text file into list
+            //
             try
             {
                 using (StreamReader file = new StreamReader("input.txt"))
@@ -62,9 +63,26 @@ namespace pos409_linq
                 Console.WriteLine(ex.GetType().ToString() + ": " + ex.Message);
             }
 
+            // Display contents of list
+            //
             cities.ForEach(city => Console.WriteLine(city));
-
+            
+            // Display count incremented while loading list
+            //
             Console.WriteLine(count);
+
+            // Display count using LINQ query
+            //
+            int linqCount = cities.Count();
+            Console.WriteLine(linqCount);
+
+            // Display list of cities in ascending order
+            //
+            List<string> ascCities = new List<string>();
+            ascCities.AddRange(cities.OrderBy(i => i));
+            ascCities.ForEach(city => Console.WriteLine(city));
+
+
 
             Console.ReadLine();
         }
