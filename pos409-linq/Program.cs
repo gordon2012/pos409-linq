@@ -13,7 +13,7 @@ The next step is to develop a set of queries and present the results to the end 
  [X] Execute a Linq query to find all states starting with a specific letter. Prompt the user for the letter they want to look for, then present those that start with that
  letter to them. There is no need at this time to validate that they entered a letter.
 
- [ ] Execute a Linq query to find all cities that are from a given state. Prompt the user for the state they want to look for, then present those that are from that state to
+ [X] Execute a Linq query to find all cities that are from a given state. Prompt the user for the state they want to look for, then present those that are from that state to
  them. Again there is no need to validate that they entered a valid state.
 
  [ ] Last, design your own Linq query and present the results to the end user. Be creative!
@@ -63,25 +63,28 @@ namespace pos409_linq
                 Console.WriteLine(ex.GetType().ToString() + ": " + ex.Message);
             }
 
+
             // Display contents of list
             //
             cities.ForEach(city => Console.WriteLine(city));
             
+
             // Display count incremented while loading list
             //
             Console.WriteLine(count);
+
 
             // Display count using LINQ query
             //
             int linqCount = cities.Count();
             Console.WriteLine(linqCount);
 
+
             // Display list of cities in ascending order
             //
             List<string> ascCities = new List<string>();
             ascCities.AddRange(cities.OrderBy(i => i));
             ascCities.ForEach(city => Console.WriteLine(city));
-
 
 
             // Display all states starting with a user specified letter
@@ -96,16 +99,16 @@ namespace pos409_linq
             letterStates.ForEach(c => Console.WriteLine(c));
 
 
+            // Display all cities from a user specified state
+            //
+            Console.Write("Please enter desired state" + Environment.NewLine + "> ");
+            string inState = Console.ReadLine();
 
-
-            //Console.Write("Please enter first letter of desired state" + Environment.NewLine + "> ");
-            //string letter = Console.ReadLine();
-            //List<string> letterCities = new List<string>();
-            //letterCities.AddRange(cities.Where(i => i.Split(',').ToList().Last().Trim().StartsWith(letter, StringComparison.OrdinalIgnoreCase)));
-            //letterCities.ForEach(city => Console.WriteLine(city));
+            List<string> citiesInState = new List<string>();
+            citiesInState.AddRange(cities.Where(city => city.Split(',').ToList().Last().Trim().Equals(inState, StringComparison.OrdinalIgnoreCase)));
+            citiesInState.ForEach(city => Console.WriteLine(city));
 
             
-
 
             Console.ReadLine();
         }
