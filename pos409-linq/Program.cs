@@ -1,28 +1,19 @@
-﻿/*
+﻿// Using LINQ
+// Gordon Doskas
+// POS/409
+// July 4, 2016
+// Carole Mckinney
 
- [X] The first step is to read a text file into the program. The file should be a list of cities and state abbreviations. Each line should look as follows: Chicago, IL. Read each
- city/state into a list. You do not need to separate the city and state into separate fields. As you read each line of the file, count up how many total cities are in the file
- and then present the total to the end user.
- 
-The next step is to develop a set of queries and present the results to the end user. In total you will do five Linq queries:
+// Program Description
+// ===================
+// This program reads a text file that contains cities and state abbreviations
+// into a list, counts up and displays how many total cities are in the file,
+// and executes and displays the results of five queries. The queries count how
+// many records are in the list, sort the entries in the list in ascending
+// order, finds all states starting with a specific letter, finds all cities
+// that are from a given state, and sorts the list by state and then by city.
 
- [X] Execute a Linq query to count how many records are in the list and present the total to the end user.
 
- [X] Execute a Linq query to sort the entries in the list in ascending order and present the list of cities to the end user, in order.
-
- [X] Execute a Linq query to find all states starting with a specific letter. Prompt the user for the letter they want to look for, then present those that start with that
- letter to them. There is no need at this time to validate that they entered a letter.
-
- [X] Execute a Linq query to find all cities that are from a given state. Prompt the user for the state they want to look for, then present those that are from that state to
- them. Again there is no need to validate that they entered a valid state.
-
- [ ] Last, design your own Linq query and present the results to the end user. Be creative!
-
- [ ] Please note that you may need to do some research on MSDN to find Linq methods to handle some of the queries. In addition, you are not going to find answers by searching
- for things like "how to handle user input with Linq". You are going to need to use your analysis skills to figure out the steps to accomplish these requirements using logic,
- the skills you have built over the last few weeks, and what you have learned about Linq.
-
-*/
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,31 +55,28 @@ namespace pos409_linq
             }
 
 
-            // Display contents of list
-            //
-            cities.ForEach(city => Console.WriteLine(city));
-            
-
             // Display count incremented while loading list
             //
-            Console.WriteLine(count);
+            Console.WriteLine("Cities in file: " + Environment.NewLine + count + Environment.NewLine);
 
 
             // Display count using LINQ query
             //
             int linqCount = cities.Count();
-            Console.WriteLine(linqCount);
+            Console.WriteLine("Cities in list: " + Environment.NewLine + linqCount + Environment.NewLine);
 
 
             // Display list of cities in ascending order
             //
             List<string> ascCities = new List<string>();
             ascCities.AddRange(cities.OrderBy(i => i));
+            Console.WriteLine("Cities in ascending order:");
             ascCities.ForEach(city => Console.WriteLine(city));
 
 
             // Display all states starting with a user specified letter
             //
+            Console.WriteLine(Environment.NewLine + "States starting with a specified letter:");
             Console.Write("Please enter first letter of desired state" + Environment.NewLine + "> ");
             string letter = Console.ReadLine();
             List<string> states = new List<string>();
@@ -101,6 +89,7 @@ namespace pos409_linq
 
             // Display all cities from a user specified state
             //
+            Console.WriteLine(Environment.NewLine + "Cities in a specified state:");
             Console.Write("Please enter desired state" + Environment.NewLine + "> ");
             string inState = Console.ReadLine();
 
@@ -108,8 +97,16 @@ namespace pos409_linq
             citiesInState.AddRange(cities.Where(city => city.Split(',').ToList().Last().Trim().Equals(inState, StringComparison.OrdinalIgnoreCase)));
             citiesInState.ForEach(city => Console.WriteLine(city));
 
-            
 
+            // Custom query: All cities, ordered by State and then City
+            //
+            Console.WriteLine(Environment.NewLine + "Cities ordered by state and city:");
+            List<string> orderedCities = new List<string>();
+            orderedCities.AddRange(cities.OrderBy(city => city.Split(',').ToList().Last().Trim()).ThenBy(city => city));
+            orderedCities.ForEach(city => Console.WriteLine(city));
+
+
+            Console.WriteLine(Environment.NewLine + "Press any key to exit");
             Console.ReadLine();
         }
     }
