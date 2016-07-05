@@ -106,7 +106,7 @@ namespace pos409_linq
             orderedCities.ForEach(city => Console.WriteLine(city));
 
 
-            Console.WriteLine(Environment.NewLine + "Press any key to exit");
+            Console.WriteLine(Environment.NewLine + "Press enter to exit");
             Console.ReadLine();
         }
     }
